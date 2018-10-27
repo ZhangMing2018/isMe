@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .main{position: relative;zoom: 1}
+    .main:after{content: '';display: block;clear: both}
+    .left{width: 200px;float: left;height: 100%;background: red}
+    .right{margin-left: 200px;height: 100px;position: absolute;width:100%;background: #00F000}
+    .main2{position: relative;zoom: 1}
+    .left2{width: 200px;height: 100%;background: red}
+    .right2{margin-left: 200px;position: absolute;height:100%;top: 0;left: 0;width:100%;background: #00F000}
+    .main3{position: relative;zoom: 1;overflow: hidden}
+    .left3{background: #0000F0;float: left;width: 200px;margin-bottom: -9999px;padding-bottom: 9999px}
+    .right3{margin-left: 200px;margin-bottom: -9999px;padding-bottom: 9999px;background: #7f00ff;height: 300px}
+</style>
+<body>
+    <div class="main">
+        <div class="left">左边固定试试事实上是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是宽</div>
+        <div class="right">右边填满剩余的sssssssssssssssssssssssssssssssssssssssssss</div>
+    </div>
+    <div class="main2">
+        <div class="left2">左边固定试试事实上是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是宽</div>
+        <div class="right2">右边填满剩余的sssssssssssssssssssssssssssssssssssssssssss</div>
+    </div>
+    <div class="main3">
+        <div class="left3">左边固定试试事实上是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是宽</div>
+        <div class="right3">右边填满剩余的sssssssssssssssssssssssssssssssssssssssssss</div>
+    </div>
+    <div class="main4">
+        <div class="left4">左边固定试试事实上是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是是宽</div>
+        <div class="right4">右边填满剩余的sssssssssssssssssssssssssssssssssssssssssss</div>
+    </div>
+</body>
+</html>

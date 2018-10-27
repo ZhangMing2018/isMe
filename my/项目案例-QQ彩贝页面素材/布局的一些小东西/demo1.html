@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>左右等高</title>
+</head>
+<style>
+    .main{border: 1px solid red;zoom: 1;position: relative;overflow: hidden}
+    .main:after{content: '';display: block;clear: both;}
+    .left{float: left;width: 200px;background: #00F000;margin-bottom: -99999px;padding-bottom: 99999px}
+    .right{;margin-left: 200px;background: #7f00ff;margin-bottom: -99999px;padding-bottom: 99999px}
+</style>
+<body>
+<div class="main">
+    <div class="left">
+        <div>11111111111111111</div>
+        <div>11111111111111111</div>
+        <div>11111111111111111</div>
+        <div>11111111111111111</div>
+        <div>1111111222</div>
+    </div>
+    <div class="right">
+        <div>wwwwwwwwwww</div>
+    </div>
+</div>
+</body>
+</html>
