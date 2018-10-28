@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--在CSS中有一个position属性，用来进行定位操作。position属性可以设置为4个属性值之一：
+
+　　1 static：默认的属性值，该盒子按照标准流（包括浮动方式）进行布局；
+
+　　2 relative：相对定位，使用相对定位的盒子的位置常以标准流的排版方式为基础，然后使盒子相对于它在原本的标准位置偏移指定的距离。
+                相对定位的盒子仍在标准流中，它后面的盒子仍以标准流方式对待它。
+
+　　3 absolute：绝对定位，盒子的位置以它父级的定位元素为基准(其中static是不算定位元素的，不知道怎么形容，绝对定位不会以他为基准)。
+                绝对定位的盒子从标准流中脱离。它对其后的相邻盒子的定位没有影响，其他的盒子就好像这个盒子不存在一样。
+
+　　4 fixed：固定定位，它和绝对定位类似，只是以浏览器窗口为基准进行定位，当拖动浏览器的滚动条时，依然保持对象位置不变-->
+<style>
+    <!--清除浮动最好的方法-->
+    .clearfix{zoom: 1;}
+    .clearfix:after{content: '';display: block;clear: both}
+</style>
+<body>
+<div class="clearfix">
+    <div style="float: left">
+        <div class="main" style="width: 500px;height: 500px;border: 1px solid #BE3300">
+            <div class="left"></div>
+            <div class="right"></div>
+        </div>
+        <div class="pos_main" style="width: 500px;height: 500px;border: 1px solid darkmagenta;position: relative;top:-100px;">
+            <div class="pos1" style="width: 100px;height: 100px;background: #00ff40"></div>
+            <div class="pos2" style="position: static;width: 100%;height: 200px;background: #0000F0">
+                <div style="width: 50px;height: 50px;background: yellow;position: absolute;top: 0;left: 0"></div>
+            </div>
+        </div>
+    </div>
+        <!--定位这个东西还是好理解-->
+        <!--绝对定位能否浮在父级同辈元素之上-->
+    <div style="float: left;margin-left: 30px">
+
+        <div class="main2" style="width: 300px;height: 300px;background: #0000F0;position: relative">
+            <div style="position: absolute;width: 200px;height: 200px;top: 250px;left: 50px;background: yellow;z-index: 10"></div>
+        </div>
+        <div class="main3" style="width: 300px;height: 200px;background: gray;position: relative">
+            <div style="position: absolute;width: 100px;height: 100px;background: red;z-index: 11">
+            </div>
+        </div>
+        <!--事实是绝对定位的元素是可以浮在父级元素之上的-->
+    </div>
+</div>
+<div>--------------------分割--------------------------</div>
+<!--用overflow: hidden；要定义width或是zoom:1-->
+<div class="clear" style="border: 1px solid red;overflow: hidden">
+    <div class="f_left" style="float: left;background: yellow">11</div>
+    <div class="f_left" style="float: left;background: saddlebrown">212</div>
+</div>
+<!--给父级一个高度;只适用于固定高-->
+<div class="clear" style="border: 1px solid red;height: 30px">
+    <div class="f_left" style="float: left;background: yellow">11</div>
+    <div class="f_left" style="float: left;background: saddlebrown">212</div>
+</div>
+<!--添加一个空div，利用css提高的clear:both清除浮动，让父级div能自动获取到高度-->
+<div class="clear" style="border: 1px solid red;">
+    <div class="f_left" style="float: left;background: yellow">11</div>
+    <div class="f_left" style="float: left;background: saddlebrown">212</div>
+    <div style="clear: both"></div>
+</div>
+
+</body>
+</html>
