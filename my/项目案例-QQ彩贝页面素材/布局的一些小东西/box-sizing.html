@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<!--盒模型box-sizing主要应该就是为了同意ie盒模型和w3c的盒模型，
+    box-sizing:content-box;内容区不包含border和padding
+    box-sizing:border-box;内容区包括border和padding-->
+<style>
+    *{margin: 0;padding: 0;}
+</style>
+<body>
+<div style="color: red;">
+    其中区别显而易见
+</div>
+<div style=";box-sizing:content-box;width: 800px;height:800px;border: 1px solid red;padding: 10px;background: yellow;margin: 10px">
+    <p>content-box,width和height计算时不包括边框和内边距</p>
+    <p>元素实际宽度 = width + padding（左右内边距大小） + border（左右边框大小）</p>
+    <p>元素实际高度 = height + padding（上下内边距大小） + border（上下边框大小）</p>
+    <p>我们设置的width和height属性实际上是元素的content内容区的宽度与高度</p>
+    <p>设置padding和border之后元素尺寸就会变大</p>
+    <img src="../img/conten-box.png" style="width: 400px;height: 400px" alt="">
+</div>
+<div style="box-sizing:border-box;width: 800px;height:800px;border: 1px solid rebeccapurple;padding: 10px;background: #00ff40;margin: 10px">
+    <p>border-box，width和height计算时内容区包括边框和内边距</p>
+    <p>元素content内容区宽度 = width - padding（左右内边距大小） - border（左右边框大小）</p>
+    <p>元素content内容区高度 = height - padding（上下内边距大小） - border（上下边框大小）</p>
+    <p>我们设置了width和height之后</p>
+    <p>元素的宽高就定下来了</p>
+    <p>设置padding与margin会使内容区变小</p>
+    <img src="../img/border-box.png" style="width: 400px;height: 400px" alt="">
+</div>
+</body>
+</html>
