@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    /*写这个发现了一个小细节。就是display：inline-block;两个div中间会有一道缝，要去除必须加上*/
+    *,.left,.right,div{margin: 0;padding: 0;font-size: 0;}
+    .clearfix{zoom: 1;width: 100%;height:100%}
+    .left{width: 400px;height: 100%;background: #00ff40;display: inline-block;}
+    .right{width:calc(100% - 412px);height: 100%;background: cadetblue;display: inline-block;}
+</style>
+<body style="height:calc(100% - 400px)">
+<!--css3新增的，对pc端布局来说很有用了。移动端的兼容性现在还不适合使用，基本不兼容-->
+<!--左右布局等高，右边不定宽-->
+<div class="clearfix">
+    <div class="left">
+        <div style="font-size: 16px">是顶顶顶顶</div>
+    </div>
+    <div class="right">
+        <div style="font-size: 16px">是是是是是是是</div>
+    </div>
+</div>
+</body>
+</html>
