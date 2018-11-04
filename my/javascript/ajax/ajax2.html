@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+</head>
+<body>
+    <button id="btn">ajax</button>
+</body>
+<script src="../js/jquery-1.8.3.min.js"></script>
+<script>
+    var btn = document.getElementById('btn');
+    btn.onclick =function(event){
+            event.preventDefault();
+            var xhr = null;
+            if(window.XMLHttpRequest){
+                xhr = new XMLHttpRequest();
+            }else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            xhr.open('GET','../1.txt',true);
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState == 4){
+                    alert(xhr.responseText);
+                }
+
+        }
+    }
+
+</script>
+</html>
