@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    var hxr ;
+    if(window.XMLHttpRequest){
+        hxr = new XMLHttpRequest();
+    }else {
+        hxr=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    hxr.open('get','../1.txt',true);
+    hxr.send();
+    hxr.onreadystatechange=function () {
+        if(hxr.readyState==4&&hxr.status==200){
+            var text = hxr.responseText;
+            document.getElementById('number').innerHTML=text;
+            // alert(hxr.responseText);
+        }
+    }
+</script>
+<body>
+        <div id="number"></div>
+</body>
+</html>
