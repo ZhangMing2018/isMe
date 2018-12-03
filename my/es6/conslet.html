@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ccc</title>
+</head>
+<body>
+
+</body>
+<script>
+    let arr = [1,23,3];
+    //把数组分割,返回新的字符串,
+    var newArr = arr.join(',')
+    console.log(newArr);//  " 1,23,3"
+    console.log(arr);
+    console.log(arr.join(' '));//  " 1 23 3"
+    console.log(arr.join(''));//  " 1233"
+    console.log(arr.join('-'));//  " 1-23-3"
+    var str = "这个啊是不是";
+    //把字符串分割成数组
+    console.log(str.split(""));
+    console.log(str);
+    console.log(str.split(" "));
+
+    //倒排reverse()在原数组上重绘
+    console.log(arr.reverse());
+    console.log(arr);
+
+    //sort()在原数组上重绘
+    var ar = ['ss','aa','bb','CC','DD']
+    var ar2 = [3,1,8,7,9];
+    console.log(ar.sort(function (a,b) {
+        var A = a.toLowerCase();
+        var B = b.toLowerCase();
+        if(A<B){return -1};
+        if(A>B){return 1};
+        return 0;
+    }));
+    console.log(ar.sort());
+    console.log(ar2.sort(function (a,b) {
+        return a - b;
+    }));
+    console.log(ar2);
+
+    //concat()创建并返回一个新数组
+    var arrA = [1,2,[3,4,5,[6,7,[8],[9,[10,11,[1,21]]]]]]
+
+    function f(arr) {
+        var newArr = [];
+        for(var i=0;i<arr.length;i++){
+            if(Array.isArray(arr[i])){
+                newArr = newArr.concat(f(arr[i]))
+
+            }else {
+                newArr.push(arr[i]);
+            }
+
+
+        }
+        return newArr;
+    }
+    var ss = f(arrA);
+console.log(ss);
+
+
+</script>
+</html>

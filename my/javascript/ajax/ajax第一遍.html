@@ -6,18 +6,33 @@
 </head>
 <script>
     var hxr ;
+    // if(window.XMLHttpRequest){
+    //     hxr = new XMLHttpRequest();
+    // }else {
+    //     hxr=new ActiveXObject("Microsoft.XMLHTTP");
+    // }
+    // hxr.open('get','../1.txt',true);
+    // hxr.send();
+    // hxr.onreadystatechange=function () {
+    //     if(hxr.readyState==4&&hxr.status==200){
+    //         var text = hxr.responseText;
+    //         document.getElementById('number').innerHTML=text;
+    //         // alert(hxr.responseText);
+    //     }
+    // }
+
+    var xhtml;
     if(window.XMLHttpRequest){
-        hxr = new XMLHttpRequest();
+        xhtml = new XMLHttpRequest();
     }else {
-        hxr=new ActiveXObject("Microsoft.XMLHTTP");
+        xhtml = new ActiveXObject('Microsoft.XMLHTTP');
     }
-    hxr.open('get','../1.txt',true);
-    hxr.send();
-    hxr.onreadystatechange=function () {
-        if(hxr.readyState==4&&hxr.status==200){
-            var text = hxr.responseText;
-            document.getElementById('number').innerHTML=text;
-            // alert(hxr.responseText);
+    xhtml.open('get','../1.txt',true);
+    xhtml.send();
+    xhtml.onreadystatechange=function(){
+        if(xhtml.readyState==4&&xhtml.status==200){
+            var text = xhtml.responseText;
+            console.log(text)
         }
     }
 </script>
