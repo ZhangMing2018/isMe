@@ -75,21 +75,21 @@ inputChange.prototype.forIn2 =function () {
 
 
 
-//    面向对象
-    var obj ={};
-    obj.name = 'zghangsna';
-    obj.getName = function () {
-        alert(this.name);
-    }
-    obj.getName();
-
-    function isObj(name) {
-        this.name = name;
-        this.getName = function () {
-            alert(this.name)
-        }
-    }
-    var aa = new isObj('张明明');
-    aa.getName();
+// //    面向对象
+//     var obj ={};
+//     obj.name = 'zghangsna';
+//     obj.getName = function () {
+//         alert(this.name);
+//     }
+//     obj.getName();
+//
+//     function isObj(name) {
+//         this.name = name;
+//         this.getName = function () {
+//             alert(this.name)
+//         }
+//     }
+//     var aa = new isObj('张明明');
+//     aa.getName();
 </script>
 </html>

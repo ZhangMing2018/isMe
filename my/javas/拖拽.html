@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #div1{height: 100px;width:100px;background: red;position: absolute}
+</style>
+<body>
+    <div id="div1"></div>
+</body>
+<script>
+    window.onload = function () {
+        var t1 = new Zhuai('div1');
+        t1.init()
+    }
+        // var oDiv = document.getElementById('div1');
+        // var odivX=0;
+        // var odivY=0;
+
+        // oDiv.onmousedown = function (ev) {
+        //     var ev = ev||window.event;
+        //     odivX = ev.clientX - oDiv.offsetLeft;
+        //     odivY = ev.clientY - oDiv.offsetTop;
+        //     document.onmousemove = function (ev) {
+        //         var ev = ev||window.event;
+        //         oDiv.style.left = ev.clientX - odivX +'px';
+        //         oDiv.style.top = ev.clientY - odivY+'px';
+        //     };
+        //     document.onmouseup = function () {
+        //         document.onmousemove = null;
+        //         document.onmouseup= null;
+        //     }
+        //     return false;
+        // };
+
+
+       function Zhuai(id) {
+            this.oDiv = document.getElementById(id);
+            this.odivX=0;
+            this.odivY=0;
+        }
+        Zhuai.prototype.init = function(){
+           var that = this;
+            this.oDiv.onmousedown = function (ev) {
+                var ev = ev||window.event;
+                that.mDown(ev);
+            }
+        }
+        Zhuai.prototype.mDown = function (ev) {
+           var that =this;
+            this.odivX = ev.clientX - this.oDiv.offsetLeft;
+            this.odivY = ev.clientY - this.oDiv.offsetTop;
+            document.onmousemove = function (ev) {
+                var ev = ev||window.event;
+                that.mMove(ev);
+            }
+            document.onmouseup = this.mUp;
+            return false;
+        }
+        Zhuai.prototype.mMove = function (ev) {
+        console.log(ev.clientX - this.odivX)
+            var XX =  ev.clientX - this.odivX;
+            var YY = ev.clientY - this.odivY;
+            // console.log(document.body.clientWidth)
+           if(XX<=0){
+               XX =0
+           }
+           if(XX>=document.body.clientWidth-this.oDiv.clientWidth){
+               XX=document.body.clientWidth-this.oDiv.clientWidth
+           }
+            this.oDiv.style.left = XX+'px';
+            this.oDiv.style.top = YY+'px';
+
+        }
+        Zhuai.prototype.mUp = function () {
+            document.onmousemove = null;
+            document.onmouseup= null;
+        }
+
+
+
+</script>
+</html>
