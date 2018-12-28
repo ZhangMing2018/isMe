@@ -6,14 +6,18 @@
 </head>
 <style>
     #div1{height: 100px;width:100px;background: red;position: absolute}
+    #div2{height: 100px;width:100px;background: blue;position: absolute;left: 200px}
 </style>
 <body>
     <div id="div1"></div>
+    <div id="div2"></div>
 </body>
 <script>
     window.onload = function () {
         var t1 = new Zhuai('div1');
-        t1.init()
+        t1.init();
+        var t2 = new Zhuai('div2');
+        t2.init()
     }
         // var oDiv = document.getElementById('div1');
         // var odivX=0;
