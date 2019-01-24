@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue1</title>
+</head>
+<body>
+
+<div id="appVue">
+    <input type="text" v-model="message">
+    <input type="text" @input="fn2">
+    <input type="checkbox" v-model="checked">
+    <p v-bind:title="message">{{message}}</p>
+    <p :title="message">{{message}}{{checked}}</p>
+
+</div>
+
+</body>
+<script src="js/vue.js"></script>
+<script>
+    let message = 'hello world!';
+   let vm = new Vue({
+        el:'#appVue',
+        data:{   //data里面定义数据
+            message:message,
+            checked:true,
+        },
+       //v-bind:响应的更新html属性，v-on:用于触发事件调用
+       methods : {
+             fn1 : function () {
+               console.log(1)
+           },
+           fn2 : function (e) {
+               this.message = e.target.value;
+           }
+       }
+    });
+</script>
+</html>
