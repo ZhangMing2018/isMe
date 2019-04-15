@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渲染</title>
+</head>
+<script src="js/vue.js"></script>
+<body>
+    <div id="main">
+        <ul>
+            <li v-for="(v,k,i) in obj">{{v}}--{{k}}--{{i}}</li>
+        </ul>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        new Vue({
+            el : '#main',
+            data :{
+                obj:{name:'zhang',sex:'nan'}
+            }
+        })
+    }
+
+</script>
+</html>
