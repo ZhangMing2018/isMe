@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据处理</title>
+</head>
+<style>
+    .red{color: red}
+    ul li{cursor: pointer;display: inline-block;width: 80px;height: 30px;line-height: 30px;text-align: center;background:grey;color: black ;
+        color: white;margin-left:10px;}
+    ul .active{background-color: #00F0F0;color: white}
+    .cotent div{width: 100px;height: 100px;border: 1px solid gold}
+    .hide{display: none;}
+
+</style>
+<body>
+    <div id="my"></div>
+
+</body>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+
+<script type="text/babel">
+    class Hello extends React.Component{
+        constructor(){
+            super();
+            this.state={
+                flage:0,
+                data:[
+                    {name:'张三',msg:'是个好人'},
+                    {name:'刘双',msg:'是个女人'},
+                    {name:'阿达',msg:'是个坏人'},
+                    {name:'注册',msg:'是个么人'},
+                ]
+            };
+        }
+
+        change(index){
+            this.setState({
+                flage:index,
+            })
+        }
+
+        render(){
+            var that = this;
+            var flage = this.state.flage;
+            var arr = this.state.data.map(function (item,index) {
+
+                return <li key={index} className={flage == index ? 'active' : ''} onClick={()=>that.change(index)}>{item.name}</li>;
+            })
+
+            var arr2 = this.state.data.map(function (item,index) {
+                return <div key={index} className={flage == index? '' : 'hide'}>{item.msg}</div>
+            })
+
+            return (
+                <div>
+                    <div>
+                        <ul>
+                            {arr}
+                        </ul>
+                    </div>
+                    <div className="cotent">
+                        {arr2}
+                    </div>
+                </div>
+            )
+
+
+        }
+    }
+
+    ReactDOM.render(
+        <Hello></Hello>,
+        document.getElementById('my')
+    );
+</script>
+</html>

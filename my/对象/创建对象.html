@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>创建对象</title>
+</head>
+<body>
+
+</body>
+    <script>
+        //创建对象方式一 简单字面量
+        var obj = new Object();
+        obj.name = '张三';
+        obj.showName = function () {
+            console.log(obj.name);
+        }
+        obj.showName();
+
+    //    创建方式二 嵌套字面量
+        var obj2 = {
+            name:'历史',
+            show:function () {
+                console.log(this.name);
+            }
+        }
+        obj2.show();
+    </script>
+</html>

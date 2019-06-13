@@ -24,10 +24,12 @@ var app = connect()
 		next();  //next 方法就是一个递归调用
 	})
 	.use('/add', function(req, res, next) {
-		console.log(req.body);
-		var data = [1,2];
-		data.push(req.body);
-		console.log(data);
+
+
+		var data = [];
+		data.push(req.body.name);
+		data.push(req.body.message);
+
 		res.end(JSON.stringify(data));
 		next();
 	})

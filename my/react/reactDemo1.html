@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .red{color: red}
+</style>
+<body>
+    <div id="my"></div>
+    <div id="my2"></div>
+</body>
+<script src="js/react.development.js"></script>
+<script src="js/react-dom.development.js"></script>
+<script src="js/babel.min.js"></script>
+
+<script type="text/babel">
+    var elem = React.createElement('div',{className:'red'},'这个');
+    let name = '这个是哪个';
+    var div = <div className="red"><h1>{name}</h1></div>
+    ReactDOM.render(
+        elem,
+        document.getElementById('my'));
+    ReactDOM.render(div,document.getElementById('my2'));
+</script>
+</html>
