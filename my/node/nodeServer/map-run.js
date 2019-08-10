@@ -6,7 +6,15 @@
 
 var connect = require('connect');  //创建连接
 var bodyParser = require('body-parser');   //body解析
-
+var map = new Map();
+function isArr(m) {
+    let arr = [];
+    for (let [key,vue] of map) {
+        arr.push({key,vue});
+    }
+    console.log(arr)
+    return arr;
+}
 var app = connect()
     .use(bodyParser.json())   //JSON解析
     .use(bodyParser.urlencoded({extended: true}))
@@ -24,25 +32,19 @@ var app = connect()
 		next();  //next 方法就是一个递归调用
 	})
 	.use('/add', function(req, res, next) {
-
-
-		var data = [];
-		data.push(req.body.name);
-		data.push(req.body.message);
-
+	    map.set(req.body.name,req.body.message);
+	    var data = {
+	        content : 200,
+            msg : 'success'
+        };
+	    console.log(map);
+	    console.log(JSON.stringify(map))
 		res.end(JSON.stringify(data));
 		next();
 	})
 	.use('/get', function(req, res, next) {
-        var data={
-            "code": "200",
-            "msg": "success",
-            "result": {
-                "id":'get',
-            }
-        };
-        console.log(req)
-        console.log(req.parameters)
+
+        var data = isArr(map)
         res.end(JSON.stringify(data));
         next();      //
     })
@@ -59,5 +61,19 @@ var app = connect()
         res.end(JSON.stringify(data));
         next();      //
     })
-    .listen(3000);   //
-console.log('Server started on port 3000.');
+    .use('/map/getList',function (req,res,next) {
+        var data ={
+            'code':'200',
+            'msg':'success',
+            result:[
+                {title:'first',cotent:[{title:'第一'},{title:'第一一'}]},
+                {title:'two',cotent:[{title:'地儿'},{title:'第二'}]},
+                {title:'three',cotent:[{title:'第三'},{title:'第三三'}]},
+                {title:'last',cotent:[{title:'第四'},{title:'第四四'}]},
+            ]
+        };
+        res.end(JSON.stringify(data));
+        next();
+    })
+    .listen(520);   //
+console.log('Server started on port 520.');

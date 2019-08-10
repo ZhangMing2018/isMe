@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件</title>
+
+</head>
+<body>
+<template id="my-one">
+    <div style="font-size: 30px;color: red;">
+        <h4>组记一</h4>
+        <div><span>李四传过来的：</span>{{data}}</div>
+        <div>{{obj.name}}</div>
+        <div>{{obj.age}}</div>
+        <input type="text" v-model="sendL">
+        <span @click="sendToL">点击传给张四</span>
+    </div>
+</template>
+<template id="my-two">
+    <div style="font-size: 30px;color: red;">
+        <h4>组记二一</h4>
+        <div><span>张三传过来的：</span>{{data}}</div>
+        <div>{{obj.name}}</div>
+        <div>{{obj.age}}</div>
+        <input type="text" v-model="sendZ">
+        <span @click="sendToZ">点击传给张三</span>
+    </div>
+</template>
+<div id="appVue">
+    <my-one @pass="getZ" :data="getLVal"></my-one>
+    <hr>
+    <my-two :data="getZVal" @send="getL"></my-two>
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+window.onload = function () {
+   new Vue({
+       el:'#appVue',
+       data:{
+           arr:[1,2,3],
+           like:'打篮球',
+           getZVal:'',
+           getLVal:'',
+       },
+       methods:{
+           getZ:function (data) {
+               this.getZVal = data;
+           },
+           getL:function (data) {
+               this.getLVal = data;
+           }
+       },
+       components:{
+           'my-one':{
+               template:'#my-one',
+               data(){
+                   return {
+                       obj:{name:"张三",age:26},
+                       sendL:'张三传来的'
+                   }
+               },
+               props:['data'],
+               methods:{
+                   sendToL:function () {
+                       this.$emit('pass',this.sendL)
+                   }
+               }
+           },
+           'my-two':{
+               template:'#my-two',
+               data(){
+                   return {
+                       obj:{name:"李四",age:25},
+                       sendZ:'李四传来的',
+                   }
+               },
+               props:['data'],
+               methods:{
+                   sendToZ:function () {
+                       this.$emit('send',this.sendZ);
+                   }
+               }
+           }
+       },
+   })
+}
+</script>
+
+</html>

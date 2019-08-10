@@ -6,6 +6,9 @@
      <link href="css/bootstrap.min.css" rel="stylesheet"/>
      <link href="css/demo.css" rel="stylesheet"/> 
      <script src="js/jquery-1.11.0.min.js"></script>
+     <style>
+         .del{padding: 5px;float: right;cursor: pointer;color: red;}
+     </style>
  </head> 
  <body>
      <div class="container">
@@ -46,32 +49,46 @@
          let message = $('.message').val();
          $.ajax({
              type:"post",  //请求类型  get post put delete
-             url:"http://localhost:3000/add",  //请求接口地址
+             url:"http://localhost:520/add",  //请求接口地址
              data:{name:name,message:message},
              async:true,
              dataType:'json',
              success:function (res) {
-                 var obj = res;
-                 console.log(obj)
-                 let  html = '<li class="list-group-item">'+obj[0].name+'<span>说：</span>'+obj[0].message+'！</li>';
+                 getData();
+             }
+         })
+     });
+
+     $('.messageList').on('click','del-success',function () {
+
+         $.ajax({
+             type:'post',
+             url: 'http://localhost:520/del',
+             async : true,
+             data : ''
+         })
+     })
+
+     function getData() {
+         $.ajax({
+             type: 'post',
+             url:'http://localhost:520/get',
+             async:true,
+             dataType:'json',
+             success : function (data) {
+                 var obj = data;
+                 var html = '';
+                 for(let o in obj){
+                     html +=`<li class="list-group-item">${obj[o].key}<span>说：</span>${obj[o].vue}！<span class="del del-success">删除</span></li>`;
+                 }
                  $('.messageList').append(html)
                  $('.name').val('');
                  $('.message').val('');
              }
          })
-         // console.log(1)
-         // let name = $('.name').val();
-         // let message = $('.message').val();
-         // let html ='';
-         // map.set(name,message);
-         // $('.messageList').empty();
-         // for(let [key,values] of map.entries()){
-         //    html += '<li class="list-group-item">'+key+'<span>说：</span>'+values+'！</li>'
-         // }
-         // $('.messageList').append(html)
-         // $('.name').val('');
-         // $('.message').val('');
-     });
+     }
+
+
  </script>
 </html>
 

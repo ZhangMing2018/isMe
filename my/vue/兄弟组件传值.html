@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟组件</title>
+</head>
+<body>
+<template id="is-one">
+    <div>
+        <div style="color: red;font-size: 30px;">
+            <h6>组件一</h6>
+            <ul>
+                <li>姓名：{{data.name}}</li>
+                <li>年龄：{{data.age}}</li>
+                <li>弟弟传过来的爱好：{{two}}</li>
+            </ul>
+        </div>
+    </div>
+
+</template>
+<template id="is-two">
+    <div>
+        <div style="color: red;font-size: 30px;">
+            <h6>组件二</h6>
+            <ul>
+                <li>姓名：{{data.name}}</li>
+                <li>年龄：{{data.age}}</li>
+            </ul>
+            <input type="text" v-model="like">
+            <botton @click="send">传给哥哥的爱好</botton>：{{like}}
+        </div>
+    </div>
+
+</template>
+<div id="appVue">
+    <div>
+        <ul>
+            <li v-for="(item,index) in arr">
+                {{item}}
+            </li>
+        </ul>
+        <is-one :two="pLike"></is-one>
+        <is-two @pass="getParent"></is-two>
+    </div>
+
+</div>
+</body>
+<script src="js/vue.js"></script>
+<script>
+window.onload = function () {
+    new Vue({
+        el:'#appVue',
+        data:{
+            arr:[1,2,3],
+            pLike:'',
+        },
+        methods:{
+            getParent:function (data) {
+                console.log(data)
+                this.pLike = data;
+            }
+        },
+        components:{
+            'is-one':{
+                template:'#is-one',
+                data(){
+                    return {
+                        data:{name:'张一',age:22}
+                    }
+                },
+                props:['two'],
+            },
+            'is-two':{
+                template :'#is-two',
+                data(){
+                    return{
+                        data:{name:'张二',age:20},
+                        like:'打篮球吧'
+                    }
+                },
+                methods:{
+                    send:function () {
+                        this.$emit('pass',this.like);
+                    },
+                }
+            }
+        },
+
+    });
+}
+</script>
+
+</html>

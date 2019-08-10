@@ -8,6 +8,7 @@
   <body>
   <button class="btn" onclick="getData()">click1</button>
   <button class="btn2">click2</button>
+  <button class="btn3">click3</button>
     <script type="text/javascript">
 	    function getXMLHttpRequest() { 
 	          var xmlhttp; 
@@ -41,10 +42,10 @@
 		//jquery
 		$(".btn2").on('click',function() {
 		  $.ajax({
-				type:"get",  //请求类型  get post put delete
+				type:"post",  //请求类型  get post put delete
 				url:"http://localhost:3000/map/get",  //请求接口地址
 				async:true,//async 异步  sync同步
-				// data:{username:"aaa", content:"123456"},  //传给后端
+                data:{username:"aaa", content:"123456"},  //传给后端
 				dataType:"json",  //返回类型
 				success:function(res) {  //请求成功
 					var obj = res;
@@ -55,6 +56,25 @@
 				}
 		  })
 		})
+
+
+        //jquery
+        $(".btn3").on('click',function() {
+            $.ajax({
+                type:"get",  //请求类型  get post put delete
+                url:"http://localhost:3000/get",  //请求接口地址
+                async:true,//async 异步  sync同步
+                data:{username:"get", content:"getMsg"},  //传给后端
+                dataType:"json",  //返回类型
+                success:function(res) {  //请求成功
+                    var obj = res;
+                    alert(JSON.stringify(res));
+                },
+                error:function() {   //请求失败
+
+                }
+            })
+        })
 		
     </script>
   </body>

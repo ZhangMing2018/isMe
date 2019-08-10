@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.js"></script>
+<style>
+    .tab_item{padding: 8px 14px;margin: 0 10px;background-color: silver;color: grey;cursor: pointer;}
+    .tab_item.active{background-color: #00ffbf;color: white;}
+</style>
+<body>
+    <div id="tab">
+        <div>
+            <span class="tab_item"
+                  v-for="(v,index) in title"
+                  :class="num == index?'active':''"
+                  @click="action(index)">
+                {{v}}
+            </span>
+        </div>
+        <div>
+            <div v-for="(v,index) in content" v-if="num == index">{{v}}</div>
+        </div>
+    </div>
+
+
+    <div id="tabList">
+        <div v-for="(v,i) in list">
+            <p class="tab_item" :class="i == num ? 'active':''" @click="cli(i)">{{v.title}}</p>
+            <ul v-if="i == num">
+                <li v-for="(m,d) in v.cotent">{{m.title}}</li>
+            </ul>
+        </div>
+        <button @click="getList(2)">axios</button>
+    </div>
+</body>
+<script>
+  　window.onload = function () {
+       new Vue({
+           el : '#tab',
+           data : {
+               title : ['a','b','c'],
+               content : ['aa','bb','cc'],
+               num : 0,
+           },
+           methods: {
+               action : function (n) {
+                   this.num = n;
+               }
+           }
+       });
+
+       new Vue({
+           el:'#tabList',
+           data : {
+               num : 0,
+               list : [],
+           },
+           methods : {
+               getList : n =>{
+                   this.num = n;
+                   console.log(n);
+                    axios({
+                        method :'get',
+                        url: 'http://localhost:520/map/getList'
+                    }).then( (res) =>{
+                        console.log(res.data.result);
+                        this.list = res.data.result;
+                    }).catch(function (erro) {
+
+                    })
+
+               },
+               cli:(a) => {
+                   this.num = a;
+                   console.log(a)
+                   console.log(num)
+
+               }
+           },
+           mounted:function () {
+               axios({
+                   method :'get',
+                   url: 'http://localhost:520/map/getList'
+               }).then( (res) =>{
+                   console.log(res.data.result);
+                   this.list = res.data.result;
+               }).catch(function (erro) {
+
+               });
+           }
+       })
+   }
+
+</script>
+</html>
