@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="appVue">
+        <my-a></my-a>
+        <my-b></my-b>
+    </div>
+
+<template id="my-a">
+    <div>
+        <h4>{{name}}</h4>
+        <div>{{msg}}</div>
+        <div style="color: red;"><span>B组件的值：</span><strong>{{listB}}</strong></div>
+        <button @click="send">发送个B</button>
+    </div>
+</template>
+<template id="my-b">
+    <div>
+        <h4>{{name}}</h4>
+        <div>{{msg}}</div>
+        <div style="color: red;"><span>A组件的值：</span><strong>{{lsitA}}</strong></div>
+        <button @click="send">发送个A</button>
+    </div>
+</template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    var vm = new Vue();
+    var a = {
+        template:'#my-a',
+        data(){
+            return {
+                name:'A组件',
+                msg:'A组件的值内容',
+                listB:'',
+            }
+        },
+        methods:{
+            send:function () {
+                vm.$emit('getA',this.msg)
+            }
+        },
+        mounted:function () {
+            var that = this;
+            vm.$on('getB',function (item) {
+                console.log(item)
+                that.listB = item;
+            })
+        }
+    };
+    var b = {
+        template:'#my-b',
+
+        data(){
+            return {
+                name:'B组件',
+                msg:'B组件的值内容',
+                lsitA:'',
+            }
+        },
+        methods:{
+            send:function () {
+                vm.$emit('getB',this.msg);
+            }
+        },
+        mounted:function () {
+            vm.$on('getA',item=>{
+                this.lsitA = item;
+            })
+        }
+    }
+
+    new Vue({
+        el:'#appVue',
+        data:{name:'张三',age:13},
+        components:{
+            'my-a':a,
+            'my-b':b,
+        }
+    });
+</script>
+</html>

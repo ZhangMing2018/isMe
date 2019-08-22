@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟组件穿传值</title>
+</head>
+<body>
+    <!--容器-->
+    <div id="appVue">
+        <p><input type="text" v-model="num"></p>
+        <p><input type="text" v-model="total"></p>
+        <p>{{result}}</p>
+    </div>
+
+</body>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#appVue',
+        data:{
+            title:'兄弟组件传值',
+            xiongMessage:'',
+            diMessage:'',
+            num:11,
+            total:12,
+        },
+        methods:{
+
+        },
+        computed:{
+            result:function () {
+                return this.num*this.total
+            }
+        },
+        components:{ //注册组件
+
+        }
+    });
+</script>
+</html>

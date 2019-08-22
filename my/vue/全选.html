@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全选</title>
+</head>
+<style>
+    ul li{ margin-left: 20px;list-style: none}
+</style>
+<body>
+    <div id="appVue">
+        <all-check :allcheck="allChek" :lists="lists"></all-check>
+    </div>
+
+    <template id="all-check" >
+        <div>
+            <ul>
+                <label>
+                    <input type="checkbox" v-model="allcheck.checked" @change="allchange()">
+                    {{allcheck.name}}
+                </label>
+                <li v-for="(item,index) in lists" :key="index">
+                    <label>
+                        <input type="checkbox" v-model="item.checked" @change="itemchange()">
+                        {{item.name}}
+                    </label>
+                </li>
+            </ul>
+
+        </div>
+    </template>
+</body>
+<script src="js/vue.js"></script>
+    <script>
+        new Vue({
+            el:'#appVue',
+            data:{
+                allChek:{name:'全选',checked:false},
+                lists:[
+                    {name:'小米',checked:false},
+                    {name:'华为',checked:false},
+                    {name:'荣耀',checked:false},
+                    {name:'苹果',checked:false},
+                    {name:'三星',checked:false},
+                    {name:'索尼',checked:false},
+                    {name:'西门子',checked:false},
+                    {name:'手机',checked:false},
+                    {name:'大哥大',checked:false},
+                    {name:'这个',checked:false},
+                    {name:'那个',checked:false},
+                ],
+            },
+            components:{
+                'all-check':{
+                    template:'#all-check',
+                    props:['allcheck','lists'],
+                    methods:{
+                        allchange:function () {
+                            console.log(this.allcheck.checked);
+                            var aa =this.allcheck.checked
+                            this.lists.forEach(item =>{
+                                item.checked = this.allcheck.checked
+                            })
+                        },
+                        itemchange:function () {
+                            var flag = this.lists.some(function (item) {
+                                return item.checked == false
+                            });
+                            console.log(flag);
+                            this.allcheck.checked = !flag;
+                        }
+                    },
+                },
+            }
+        })
+    </script>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插槽</title>
+</head>
+<body>
+    <div id="appVue">
+        <my-a :name="name" :age="age">
+            <li slot-scope="data">{{data.data.title}}</li>
+        </my-a>
+        <my-b>
+            <li >123</li>
+            <li slot="aa">456</li>
+            <!--具名插槽-->
+            <li>78</li>
+        </my-b>
+    </div>
+
+<template id="my-a">
+        <div>
+            <h4>{{name}}</h4>
+            <slot :data="data"></slot>
+            <h4>{{age}}</h4>
+        </div>
+    </template>
+    <template id="my-b">
+        <div>
+            <h4>{{name}}</h4>
+            <slot name="aa"></slot>
+            <h4>{{age}}</h4>
+        </div>
+    </template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+   new Vue({
+       el:'#appVue',
+       data:{
+           name:'zhan',
+           age:18,
+       },
+       components:{
+           'my-a':{
+               template:'#my-a',
+               props:['name','age'],
+               data(){
+                   return {
+                       data:{
+                           title:'弟的标题',
+                           data:{name:'小弟',age:28},
+                           message:'这是小弟要对大哥说的话',
+                       },
+
+                   }
+               }
+           },
+           'my-b':{
+               template:'#my-b',
+               props:['name','age'],
+               data(){
+                   return {
+                       title:'弟的标题',
+                   }
+               }
+           }
+       }
+   });
+</script>
+</html>

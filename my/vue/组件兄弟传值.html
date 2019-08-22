@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兄弟组件穿传值</title>
+</head>
+<body>
+    <!--容器-->
+    <div id="appVue">
+            <xiong @send-father="getXiong" :di="diMessage"></xiong>
+        <div style="background-color: red;margin: 20px 0;">中间隔开</div>
+            <di :xiong="xiongMessage" @sendfather="getDi"></di>
+    </div>
+<template id="xiong">
+    <div style="color: #00F0F0;line-height: 28px">
+        <h4>{{title}}</h4>
+        <div><span>姓名</span>{{data.name}}</div>
+        <div><span>年龄</span>{{data.age}}</div>
+        <input type="text" v-model="message">
+        <p @click="send" style="color: rebeccapurple;font-size: 18px;">提交</p>
+        <span style="color: red">弟传过来的值:</span><strong>{{di}}</strong>
+    </div>
+</template>
+<template id="di">
+    <div style="color: #00F0F0;line-height: 28px">
+        <h4>{{title}}</h4>
+        <div><span>姓名</span>{{data.name}}</div>
+        <div><span>年龄</span>{{data.age}}</div>
+        <input type="text" v-model="message">
+        <p @click="send" style="color: rebeccapurple;font-size: 18px;">提交</p>
+        <span style="color: red">兄传过来的值:</span><strong>{{xiong}}</strong>
+    </div>
+</template>
+</body>
+<script src="js/vue.js"></script>
+<script>
+    new Vue({
+        el:'#appVue',
+        data:{
+            title:'兄弟组件传值',
+            xiongMessage:'',
+            diMessage:'',
+        },
+        methods:{
+            getXiong:function (data) {
+                this.xiongMessage = data;
+            },
+            getDi:function (data) {
+                this.diMessage = data;
+            }
+        },
+        components:{ //注册组件
+            'xiong':{
+                template:'#xiong',
+                data(){
+                    return {
+                        title:'兄的标题',
+                        data:{name:'大哥',age:30},
+                        message:'这是大哥要对小弟说的话',
+                    }
+                },
+                props:['di'],
+                methods:{
+                    send:function () {
+                        this.$emit('send-father',this.message)
+                    }
+                }
+            },
+            'di':{
+                template:'#di',
+                data(){
+                    return {
+                        title:'弟的标题',
+                        data:{name:'小弟',age:28},
+                        message:'这是小弟要对大哥说的话',
+                    }
+                },
+                props:['xiong'],
+                methods:{
+                    send:function () {
+                        this.$emit('sendfather',this.message)
+                    }
+                }
+
+            }
+        }
+    });
+</script>
+</html>
